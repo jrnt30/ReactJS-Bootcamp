@@ -5,12 +5,22 @@ import './_App.scss';
 import React from 'react';
 import Header from '../Header/Header';
 import MovieList from '../MovieList/MovieList';
-import mockData from '../../mock/day0.json';
+import { getMovies } from '../../util/api';
 
 export default class App extends React.Component {
 
   constructor(...args) {
     super(...args);
+    this.state = {
+      movies: []
+    };
+  }
+
+  componentDidMount() {
+    getMovies().then((movies) => {
+      movies = movies.movies;
+      this.setState({movies});
+    });
   }
 
   render() {
@@ -23,6 +33,6 @@ export default class App extends React.Component {
   }
 
   retrieveMovies() {
-    return mockData ? mockData.movieTitles : [];
+    return this.state.movies || [];
   }
 }
