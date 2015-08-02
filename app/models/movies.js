@@ -1,5 +1,10 @@
 import _ from 'lodash';
 
+/*
+ * Could clean this up to be export new MoviesModel() instead and then just
+ * use it as a singleton but for the purpose of demo we are not yet
+ */
+
 export default class movies {
 	//no constructor on purpose 
 
