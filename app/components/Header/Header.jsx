@@ -31,10 +31,12 @@ export default class Header extends React.Component {
           <h1 className="title">FakeFlix</h1>
           <div className="header-right">
             {searchBox}
-            <select value={this.props.layout} className="display-select">
+            <select className="display-select"
+                    value={this.props.layout}
+                    onChange={this.sort.bind(this)}>
               <option>View By:</option>
-              <option value="tile">Tile</option>
-              <option value="list">List</option>
+              <option value="title">Title</option>
+              <option value="rating">Rating</option>
             </select>
           </div>
         </div>
@@ -42,4 +44,12 @@ export default class Header extends React.Component {
     );
   }
 
+  sort(e) {
+    this.props.sort(e.target.value);
+  }
+
+}
+
+Header.defaultProps = {
+  sort: function() {}
 }

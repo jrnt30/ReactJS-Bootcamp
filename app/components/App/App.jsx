@@ -3,6 +3,7 @@
 import './_App.scss';
 
 import React from 'react';
+import _ from 'lodash';
 import Header from '../Header/Header';
 import MovieList from '../MovieList/MovieList';
 import { getMovies } from '../../util/api';
@@ -26,7 +27,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div className={'app'}>
-        <Header />
+        <Header sort={this.sortMovies.bind(this)}/>
         <MovieList movies={this.retrieveMovies()}/>
       </div>
     );
@@ -34,5 +35,13 @@ export default class App extends React.Component {
 
   retrieveMovies() {
     return this.state.movies || [];
+  }
+
+  sortMovies(key) {
+    let sorted = _.sortBy(this.state.movies, (movie) => {
+      return movie[key];
+    });
+
+    this.setState({movies: sorted});
   }
 }
