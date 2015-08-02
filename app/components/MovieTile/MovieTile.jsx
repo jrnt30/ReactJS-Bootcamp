@@ -40,7 +40,7 @@ export default class MovieTile extends React.Component {
               <i key={idx} className="fa fa-star-o"
                            data-rating={idx}
                            onClick={this.updateRating.bind(this)}/>;
-          }); //TODO: why did I need to bind this.
+          });
   }
 
   updateRating(e) {
