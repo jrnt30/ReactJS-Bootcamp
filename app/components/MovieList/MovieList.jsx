@@ -26,5 +26,5 @@ MovieList.deafultProps = {
 
 MovieList.propTypes = {
   movies: React.PropTypes.array,
-  rate: React.PropTypes.function
+  rate: React.PropTypes.func
 };

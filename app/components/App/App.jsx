@@ -6,7 +6,7 @@ import React from 'react';
 import _ from 'lodash';
 import Header from '../Header/Header';
 import MovieList from '../MovieList/MovieList';
-import MoviesModel from '../../models/movies';
+import MoviesModel from '../../models/Movies';
 import { getMovies } from '../../util/api';
 
 export default class App extends React.Component {

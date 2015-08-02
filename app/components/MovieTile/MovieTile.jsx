@@ -58,5 +58,5 @@ MovieTile.defaultProps = {
 
 MovieTile.propTypes = {
   movies: React.PropTypes.string,
-  rate: React.PropTypes.function
+  rate: React.PropTypes.func
 };

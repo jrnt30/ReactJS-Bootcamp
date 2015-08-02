@@ -83,3 +83,12 @@ Header.defaultProps = {
   search: function() {},
   reset: function() {}
 }
+
+
+
+Header.propTypes = {
+  sort: React.PropTypes.func,
+  search: React.PropTypes.func,
+  reset: React.PropTypes.func
+};
+
