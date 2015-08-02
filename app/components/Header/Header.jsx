@@ -5,15 +5,18 @@ export default class Header extends React.Component {
 
   constructor(...args) {
     super(...args);
+    this.state = {
+      searchTerm: null
+    };
   }
 
   render() {
 
     var searchBox;
-    if (this.props.term) {
+    if (this.state.searchTerm) {
       searchBox = (
         <h3 className="term">
-          {this.props.term} <a href='#'><i className="fa fa-times"/></a>
+          {this.state.searchTerm} <a href='#'><i className="fa fa-times"/></a>
         </h3>
       );
     }
@@ -32,7 +35,6 @@ export default class Header extends React.Component {
           <div className="header-right">
             {searchBox}
             <select className="display-select"
-                    value={this.props.layout}
                     onChange={this.sort.bind(this)}>
               <option>View By:</option>
               <option value="title">Title</option>
@@ -48,10 +50,14 @@ export default class Header extends React.Component {
     e.preventDefault();
     //this is not efficient but for day 3 this is what we will be doing
     //fixing on day 4
-    this.props.search(this.refs.searchBox.getDOMNode().value);
+    let searchTerm = this.refs.searchBox.getDOMNode().value;
+    this.setState({searchTerm});
+    this.props.search(searchTerm); //can't use state because its async
   }
 
   sort(e) {
+    //this does not properly sort by user selected rating so we talk about that limitation and fix
+    //on day 4
     this.props.sort(e.target.value);
   }
 
