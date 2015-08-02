@@ -16,7 +16,11 @@ export default class Header extends React.Component {
     if (this.state.searchTerm) {
       searchBox = (
         <h3 className="term">
-          {this.state.searchTerm} <a href='#'><i className="fa fa-times"/></a>
+          {this.state.searchTerm}
+          <a href='#'>
+            <i className="fa fa-times"
+                onClick={this.reset.bind(this)}/>
+          </a>
         </h3>
       );
     }
@@ -61,9 +65,14 @@ export default class Header extends React.Component {
     this.props.sort(e.target.value);
   }
 
+  reset() {
+    this.props.reset();
+  }
+
 }
 
 Header.defaultProps = {
   sort: function() {},
-  search: function() {}
+  search: function() {},
+  reset: function() {}
 }
