@@ -75,6 +75,7 @@ MovieList.propTypes = {
 ### movietile.jsx
 
 * talk about how refactoring stars into its own component can cleaner logical flow
+* talk about how stars doesn't change upwards in the stack to app.jsx which may have reprocussions day 3 during sorting.
 
 ```javascriptimport React from 'react';
 import _ from 'lodash';

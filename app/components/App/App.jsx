@@ -27,7 +27,8 @@ export default class App extends React.Component {
   render() {
     return (
       <div className={'app'}>
-        <Header sort={this.sortMovies.bind(this)}/>
+        <Header sort={this.sortMovies.bind(this)}
+                search={this.searchMovies.bind(this)}/>
         <MovieList movies={this.retrieveMovies()}/>
       </div>
     );
@@ -37,8 +38,17 @@ export default class App extends React.Component {
     return this.state.movies || [];
   }
 
+  searchMovies(key) {
+    let searchResults = _.findWhere(this.state.movies, {title: key});
+    this.setState({movies: [searchResults]});
+  }
+
   sortMovies(key) {
     let sorted = _.sortBy(this.state.movies, (movie) => {
+      if(key === 'rating') {
+        return parseInt(movie[key])
+      }
+
       return movie[key];
     });
 

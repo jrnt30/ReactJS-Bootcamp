@@ -19,8 +19,8 @@ export default class Header extends React.Component {
     }
     else {
       searchBox = (
-        <form className="search-form">
-          <input className="search-input" type="text" placeholder="Search" />
+        <form className="search-form" onSubmit={this.search.bind(this)}>
+          <input ref="searchBox" className="search-input" type="text" placeholder="Search" />
         </form>
       );
     }
@@ -44,6 +44,13 @@ export default class Header extends React.Component {
     );
   }
 
+  search(e) {
+    e.preventDefault();
+    //this is not efficient but for day 3 this is what we will be doing
+    //fixing on day 4
+    this.props.search(this.refs.searchBox.getDOMNode().value);
+  }
+
   sort(e) {
     this.props.sort(e.target.value);
   }
@@ -51,5 +58,6 @@ export default class Header extends React.Component {
 }
 
 Header.defaultProps = {
-  sort: function() {}
+  sort: function() {},
+  search: function() {}
 }
