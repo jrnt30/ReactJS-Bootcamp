@@ -32,7 +32,8 @@ export default class App extends React.Component {
         <Header sort={this.sortMovies.bind(this)}
                 search={this.searchMovies.bind(this)}
                 reset={this.reset.bind(this)}/>
-        <MovieList movies={this.retrieveMovies()}/>
+        <MovieList movies={this.retrieveMovies()}
+                   rate={this.rateMovie.bind(this)}/>
       </div>
     );
   }
@@ -46,12 +47,16 @@ export default class App extends React.Component {
   }
 
   searchMovies(key) {
-    let searchResults = this.moviesModel.getBySearch(key);
-    this.setState({movies: [searchResults]});
+    let searchResult = this.moviesModel.getBySearch(key);
+    this.setState({movies: searchResult});
   }
 
   sortMovies(key) {
     let sorted = this.moviesModel.getSorted(key);
     this.setState({movies: sorted});
+  }
+
+  rateMovie(...args) {
+    this.moviesModel.updateRating(...args);
   }
 }

@@ -23,8 +23,18 @@ export default class movies {
 	    });
 	}
 
-	getBySearch(title) {
-		let movies = this.movies;
-		return _.findWhere(movies, {title});
+	getBySearch(title, moviesArray) {
+		let movies = moviesArray || this.movies;
+		let result = _.findWhere(movies, {title});
+		return result ? [result] : [];
+	}
+
+	updateRating(title, rating) {
+		let moviesList = this.movies;
+		let [movie] = this.getBySearch(title, moviesList);
+		if(movie) {
+			movie.rating = '' + rating;
+			this.movies = moviesList;
+		}
 	}
 }

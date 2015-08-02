@@ -6,14 +6,15 @@ export default class Header extends React.Component {
   constructor(...args) {
     super(...args);
     this.state = {
-      searchTerm: null
+      searchTerm: null,
+      submitted: false
     };
   }
 
   render() {
 
     var searchBox;
-    if (this.state.searchTerm) {
+    if (this.state.submitted) {
       searchBox = (
         <h3 className="term">
           {this.state.searchTerm}
@@ -27,7 +28,12 @@ export default class Header extends React.Component {
     else {
       searchBox = (
         <form className="search-form" onSubmit={this.search.bind(this)}>
-          <input ref="searchBox" className="search-input" type="text" placeholder="Search" />
+          <input ref="searchBox"
+                 className="search-input"
+                 type="text"
+                 placeholder="Search"
+                 value={this.state.searchTerm}
+                 onChange={this.updateSearchTerm.bind(this)}/>
         </form>
       );
     }
@@ -50,23 +56,24 @@ export default class Header extends React.Component {
     );
   }
 
+  updateSearchTerm(e) {
+    let searchTerm = e.target.value;
+    this.setState({searchTerm});
+  }
+
   search(e) {
     e.preventDefault();
-    //this is not efficient but for day 3 this is what we will be doing
-    //fixing on day 4
-    let searchTerm = this.refs.searchBox.getDOMNode().value;
-    this.setState({searchTerm});
-    this.props.search(searchTerm); //can't use state because its async
+    this.props.search(this.state.searchTerm);
+    this.setState({submitted: true});
   }
 
   sort(e) {
-    //this does not properly sort by user selected rating so we talk about that limitation and fix
-    //on day 4
     this.props.sort(e.target.value);
   }
 
   reset() {
     this.props.reset();
+    this.setState({submitted: false, searchTerm: undefined});
   }
 
 }
