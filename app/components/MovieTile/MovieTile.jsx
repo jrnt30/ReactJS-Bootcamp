@@ -34,9 +34,19 @@ export default class MovieTile extends React.Component {
   retrieveRating() {
     return _.map(_.range(MAX_STARS), (idx) => {
       return idx < this.state.stars ?
-              <i key={idx} className="fa fa-star"/>
-              : <i key={idx} className="fa fa-star-o"/>;
+              <i key={idx} className="fa fa-star"
+                           data-rating={idx}
+                           onClick={this.updateRating.bind(this)}/>
+              : 
+              <i key={idx} className="fa fa-star-o"
+                           data-rating={idx}
+                           onClick={this.updateRating.bind(this)}/>;
           }.bind(this)); //TODO: why did I need to bind this.
+  }
+
+  updateRating(e) {
+    let stars = parseInt(e.target.attributes['data-rating'].value) + 1;
+    this.setState({stars});
   }
 }
 
